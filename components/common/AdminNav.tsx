@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import { FC } from 'react';
 import Logo from './Logo';
-import {
-  AiOutlineDashboard,
-  AiOutlineContainer,
-  AiOutlineTeam,
-  AiOutlineMail,
-} from 'react-icons/ai';
+import { IconType } from 'react-icons/lib';
 
-interface Props {}
+interface Props {
+  navItems: {
+    label: string;
+    icon: IconType;
+    href: string;
+  }[];
+}
 
-const AdminNav: FC<Props> = (props): JSX.Element => {
+const AdminNav: FC<Props> = ({ navItems }): JSX.Element => {
   return (
     <nav className="h-screen w-60 shadow-sm bg-secondary-light dark:bg-secondary-dark">
       <Link href="/admin" className="flex items-center space-x-2 p-3 mb-10">
@@ -21,34 +22,16 @@ const AdminNav: FC<Props> = (props): JSX.Element => {
       </Link>
       {/* Nav items */}
       <div className="space-y-6">
-        <Link
-          href="/admin"
-          className="flex items-center p-3 text-highlight-light dark:text-highlight-dark text-xl hover:scale-[0.98] transition"
-        >
-          <AiOutlineDashboard size={24} />
-          <span className="ml-2">Dashboard</span>
-        </Link>
-        <Link
-          href="/admin/posts"
-          className="flex items-center p-3 text-highlight-light dark:text-highlight-dark text-xl hover:scale-[0.98] transition"
-        >
-          <AiOutlineContainer size={24} />
-          <span className="ml-2">Posts</span>
-        </Link>
-        <Link
-          href="/admin/users"
-          className="flex items-center p-3 text-highlight-light dark:text-highlight-dark text-xl hover:scale-[0.98] transition"
-        >
-          <AiOutlineTeam size={24} />
-          <span className="ml-2">Users</span>
-        </Link>
-        <Link
-          href="/admin/comments"
-          className="flex items-center p-3 text-highlight-light dark:text-highlight-dark text-xl hover:scale-[0.98] transition"
-        >
-          <AiOutlineMail size={24} />
-          <span className="ml-2">Comments</span>
-        </Link>
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="flex items-center p-3 text-highlight-light dark:text-highlight-dark text-xl hover:scale-[0.98] transition"
+          >
+            <item.icon size={24} />
+            <span className="ml-2">{item.label}</span>
+          </Link>
+        ))}
       </div>
     </nav>
   );
