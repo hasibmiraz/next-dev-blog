@@ -10,7 +10,7 @@ const Editor: FC<Props> = (props): JSX.Element => {
     extensions: [StarterKit],
   });
   return (
-    <div>
+    <div className="p-3 dark:bg-primary-dark bg-primary transition">
       <ToolBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
