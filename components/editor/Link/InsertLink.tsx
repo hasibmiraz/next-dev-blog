@@ -11,6 +11,7 @@ const InsertLink: FC<Props> = ({ onSubmit }): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const hideForm = () => setVisible(false);
+  const showForm = () => setVisible(true);
 
   const handleSubmit = (link: linkOption) => {
     if (!link.url.trim()) return hideForm();
@@ -25,7 +26,7 @@ const InsertLink: FC<Props> = ({ onSubmit }): JSX.Element => {
       }}
       className="relative"
     >
-      <Button onClick={() => setVisible(!visible)}>
+      <Button onClick={visible ? hideForm : showForm}>
         <BsLink45Deg />
       </Button>
 
